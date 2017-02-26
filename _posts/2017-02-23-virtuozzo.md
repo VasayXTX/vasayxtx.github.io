@@ -11,32 +11,38 @@ title: Шпаргалка по работе с Virtuozzo
 
 *Вывести список контейнеров и ВМ:*
 
-    prlctl list # Только запущенных
-    prlctl list -a # Всех
+    prlctl list # Только запущенные
+    prlctl list -a # Все
+    prlctl list -i # Детали по всем контейнерам
+    prlctl list -i MyCT # Детали по контейнеру с именем MyCT
     
 *Вывод списка ОС-шаблонов:*
     
     vzpkg list --with-summary 
     
-*Создание контейнера c именем 101:*
+*Создание контейнера c именем MyCT:*
 
-    prlctl create 101 --vmtype ct # На базе дефолтного шаблона 
-    prlctl create 101 --vmtype ct --ostemplate centos-7-x86_64
+    prlctl create MyCT --vmtype ct # На базе дефолтного шаблона 
+    prlctl create MyCT --vmtype ct --ostemplate centos-7-x86_64
     
-*Старт, стоп и рестарт контейнера и ВМ:*
+*Вывод статуса, старт, стоп и рестарт контейнера и ВМ:*
+
+    prlctl status MyCT 
+    prlctl start MyCT
+    prlctl stop MyCT
+    prlctl restart MyCT
     
-    prlctl start 101
-    prlctl stop 101
-    prlctl restart 101
+*Выполнить команду внутри контейнера:*
+
+    prlctl exec MyCT whoami # root
     
-*Добавление сетевого интерфейса:*
-
-    prlctl set 101 --netif_add eth0
-
-*Включение dhcp на сетевом интерфейсе:*
-
-    prlctl set 101 --ifname eth0 --dhcp yes
-
+*Конфигурирование контейнера:*
+    
+    prlctl set MyCT --netif_add eth0 # Добавление сетевого интерфейса
+    prlctl set MyCT --ifname eth0 --dhcp yes # Включение dhcp на сетевом интерфейсе
+    prlctl set MyCT --memsize 1G # Выделение 1gb оперативной памяти
+    prlctl set MyCT --swappages 512M # Выделение 512mb swap'а
+    
 *Вывод списка сетей:*
     
     vznetcfg net list
@@ -50,3 +56,7 @@ title: Шпаргалка по работе с Virtuozzo
     vzlicview # Вывод данных об установленной лицензии
     vzlicload -p <key_or_code>
     vzlicload -f <license_file>
+    
+*Удаление контейнера или ВМ (перед этим он должен быть остановлен):*
+
+    prlctl delete MyCT
