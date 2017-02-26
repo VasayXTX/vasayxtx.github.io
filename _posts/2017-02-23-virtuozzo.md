@@ -3,9 +3,9 @@ layout: post
 title: Шпаргалка по работе с Virtuozzo
 ---
 
-**Parallels Virtuozzo (ранее Parallels Cloud Server)** - платформа для виртуализации позволяющая создавать виртуальные машины и контейнеры.
+**Parallels Virtuozzo (ранее Parallels Cloud Server)** - платформа для виртуализации, позволяющая создавать виртуальные машины и контейнеры.
 
-*Отобразить конфигурация Virtuozzo:
+*Отобразить конфигурация Virtuozzo:*
     
     prlsrvctl info
 
@@ -37,11 +37,11 @@ title: Шпаргалка по работе с Virtuozzo
 
     prlctl set 101 --ifname eth0 --dhcp yes
 
-Вывод списка сетей:
+*Вывод списка сетей:*
     
     vznetcfg net list
 
-Список NIC/VLAN/bridge интерфейсов:
+*Список NIC/VLAN/bridge интерфейсов:*
 
     vznetcfg if list
 
